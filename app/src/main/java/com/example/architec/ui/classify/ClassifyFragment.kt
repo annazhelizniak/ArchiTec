@@ -176,12 +176,12 @@ class ClassifyFragment : Fragment() {
         val classificationResultFragment = ClassificationResultFragment()
         classificationResultFragment.arguments = bundle
 
-        parentFragmentManager.beginTransaction()
+        requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.nav_host_fragment_content_main, classificationResultFragment)
             .addToBackStack(null)
             .commit()
-
     }
+
 
 
     private fun openCamera() {
