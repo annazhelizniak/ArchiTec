@@ -1,4 +1,4 @@
-package com.example.architec
+package com.example.architec.ui
 
 import android.os.Bundle
 import android.view.Menu
@@ -12,6 +12,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.appcompat.app.AppCompatActivity
+import com.example.architec.R
 import com.example.architec.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -36,7 +37,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.navView?.let {
             appBarConfiguration = AppBarConfiguration(setOf(
-                    R.id.nav_transform, R.id.nav_reflow, R.id.nav_slideshow, R.id.nav_settings),
+                R.id.nav_transform, R.id.nav_reflow, R.id.nav_slideshow, R.id.nav_settings
+            ),
                     binding.drawerLayout
             )
             setupActionBarWithNavController(navController, appBarConfiguration)
@@ -45,7 +47,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.appBarMain.contentMain.bottomNavView?.let {
             appBarConfiguration = AppBarConfiguration(setOf(
-                    R.id.nav_transform, R.id.nav_reflow, R.id.nav_slideshow))
+                R.id.nav_transform, R.id.nav_reflow, R.id.nav_slideshow
+            ))
             setupActionBarWithNavController(navController, appBarConfiguration)
             it.setupWithNavController(navController)
         }

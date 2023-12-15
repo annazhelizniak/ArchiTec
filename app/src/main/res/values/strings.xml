@@ -22,4 +22,8 @@
     <string name="image_view_item_transform_content_description">Represents an image view in the
         item
     </string>
+    <string name="selected_picture">Selected picture</string>
+    <string name="photo">Photo</string>
+    <string name="gallery">Gallery</string>
+    <string name="next">Next</string>
 </resources>
