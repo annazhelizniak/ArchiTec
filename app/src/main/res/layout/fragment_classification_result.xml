@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/user_input"
         android:layout_marginTop="16dp"
-        android:text="Classification Result"
+        android:text="Baroque architecture"
         android:textSize="18sp"
         tools:text="Style: Vintage, Probability: 80%"/>
 

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1091546176780",
+    "project_id": "architec-b62f9",
+    "storage_bucket": "architec-b62f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1091546176780:android:e0e95a5532ccc8ce257d29",
+        "android_client_info": {
+          "package_name": "com.example.architec"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1091546176780-nn56p0ic3djsk91ut2agipdvi8ea5onl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.architec",
+            "certificate_hash": "6a8ec4f93d24fcd3b70fa13d4479091291b14c9e"
+          }
+        },
+        {
+          "client_id": "1091546176780-ffan1vi9229lmbmgts24i5raptp3ttl2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFHQ93aEHVGpce7-CeL7uqO9AtfcKMmhg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1091546176780-ffan1vi9229lmbmgts24i5raptp3ttl2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
