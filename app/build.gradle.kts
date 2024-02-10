@@ -54,6 +54,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth:22.3.0")
     implementation("androidx.annotation:annotation:1.6.0")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
 
     implementation("org.tensorflow:tensorflow-lite:2.8.0")

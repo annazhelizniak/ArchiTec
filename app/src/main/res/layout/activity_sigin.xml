@@ -24,8 +24,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="16dp"
-            android:fontFamily="Teko"
-            android:text="@string/welcome_to_architec" />
+            android:fontFamily="@font/teko_semibold"
+            android:text="@string/welcome_to_architec"
+            android:textSize="32sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView3"
@@ -33,8 +35,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="0dp"
             android:layout_marginTop="39dp"
-            android:fontFamily="Teko"
-            android:text="@string/authorize_to_get_access_to_all_functions" />
+            android:fontFamily="@font/teko_medium"
+            android:text="@string/authorize_to_get_access_to_all_functions"
+            android:textSize="20sp" />
 
         <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"
@@ -43,8 +46,11 @@
             android:layout_marginTop="80dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/red_middle"
-            android:text="Sign in"
+            android:fontFamily="@font/teko"
+            android:letterSpacing="0.06"
+            android:text="@string/sign_in"
             android:textAllCaps="false"
+            android:textSize="18sp"
             app:cornerRadius="30dp" />
 
         <com.google.android.material.button.MaterialButton
@@ -53,23 +59,31 @@
             android:layout_marginHorizontal="48dp"
             android:layout_marginVertical="0dp"
             android:backgroundTint="@color/light_grey"
-            android:text="Create new Account"
+            android:fontFamily="@font/teko"
+            android:textSize="18sp"
+            android:letterSpacing="0.06"
+            android:text="@string/create_new_account"
             android:textAllCaps="false"
             android:textColor="@color/black"
             app:cornerRadius="30dp" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/google_sign_in"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="48dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="24dp"
             android:backgroundTint="@color/light_grey"
-            android:text="Sign in with Google"
+            android:fontFamily="@font/teko"
+            android:textSize="18sp"
+            android:letterSpacing="0.06"
+            android:text="@string/sign_in_with_google"
             android:textAllCaps="false"
             android:textColor="@color/black"
             app:cornerRadius="30dp"
-            app:icon="@drawable/googleg_standard_color_18" />
+            app:icon="@drawable/googleg_disabled_color_18"
+            app:iconTint="@color/red_middle"/>
 
     </LinearLayout>
 
