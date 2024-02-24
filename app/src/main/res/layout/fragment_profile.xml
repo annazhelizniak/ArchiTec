@@ -35,7 +35,7 @@
                 <ImageView
                     android:layout_height="121dp"
                     android:layout_width="121dp"
-                    android:id="@+id/imageView1"
+                    android:id="@+id/user_profile_image"
                     android:layout_gravity="center"
                     android:src="@drawable/profile_icon"
                     android:layout_alignParentTop="true"
@@ -62,7 +62,7 @@
                 android:text="Name" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/user_profile_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/teko_medium"
@@ -79,7 +79,7 @@
                 android:text="Surname" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/user_profile_surname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/teko_medium"
@@ -96,7 +96,7 @@
                 android:text="Email" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/user_profile_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/teko_medium"
@@ -117,7 +117,7 @@
                 android:text="Settings" />
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/button2"
+                android:id="@+id/sign_out"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
