@@ -119,6 +119,7 @@ class ClassifyFragment : Fragment() {
             }
         )
     }
+
     private fun showPhotoPreview(photoFile: File) {
         try {
             // Decode the image file to get its dimensions and orientation
@@ -165,7 +166,6 @@ class ClassifyFragment : Fragment() {
     }
 
 
-
 // In ClassifyFragment.kt
 
     private fun navigateToNextFragment() {
@@ -181,7 +181,6 @@ class ClassifyFragment : Fragment() {
             .addToBackStack(null)
             .commit()
     }
-
 
 
     private fun openCamera() {
