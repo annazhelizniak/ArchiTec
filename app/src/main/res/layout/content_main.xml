@@ -22,5 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_gravity="bottom"
-        app:menu="@menu/bottom_navigation" />
+        app:menu="@menu/bottom_navigation"
+        style="@style/BottomNavigationStyle"/>
 </LinearLayout>

@@ -17,6 +17,12 @@
         android:theme="@style/SplashScreen.Theme"
         tools:targetApi="31">
         <activity
+            android:name=".ui.SignInEmailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.CreateAccountActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.SiginActivity"
             android:exported="true">
             <intent-filter>

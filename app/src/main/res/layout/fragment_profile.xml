@@ -33,8 +33,8 @@
                 android:shape="ring"
                 android:thicknessRatio="1.9">
                 <ImageView
-                    android:layout_height="121dp"
-                    android:layout_width="121dp"
+                    android:layout_height="141dp"
+                    android:layout_width="141dp"
                     android:id="@+id/user_profile_image"
                     android:layout_gravity="center"
                     android:src="@drawable/profile_icon"

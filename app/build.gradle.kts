@@ -59,6 +59,9 @@ dependencies {
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("com.google.firebase:firebase-firestore-ktx:24.10.2")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
+
 
     implementation("org.tensorflow:tensorflow-lite:2.8.0")
 

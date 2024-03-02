@@ -44,6 +44,14 @@ class SiginActivity : AppCompatActivity() {
         binding.googleSignIn.setOnClickListener{
             signInWithGoogle()
         }
+        binding.createAccount.setOnClickListener{
+            val i = Intent(this, CreateAccountActivity::class.java)
+            startActivity(i)
+        }
+        binding.signIn.setOnClickListener{
+            val i = Intent(this, SignInEmailActivity::class.java)
+            startActivity(i)
+        }
         checkAuthenticationState()
 
     }
