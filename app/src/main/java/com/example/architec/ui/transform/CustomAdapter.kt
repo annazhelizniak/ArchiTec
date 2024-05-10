@@ -63,6 +63,11 @@ class CustomAdapter(data: MutableList<ArchitectureStyle>, context: Context) :
         viewHolder.txtTimePeriod?.text = dataModel?.time_period
         viewHolder.txtOrigin?.text = dataModel?.origin
 
+        // Set click listener on the entire row view
+        rowView.setOnClickListener(this)
+        rowView.tag = position
+
         return rowView
     }
+
 }

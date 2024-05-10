@@ -1,7 +1,7 @@
 package com.example.architec.data
 
 class ArchitectureStyle (
-    val id: String? = null,
+    var id: String? = null,
     val name: String? = null,
     val description: String? = null,
     val features: List<String>? = null,

@@ -45,6 +45,7 @@ class TransformFragment : Fragment() {
                     if (task.isSuccessful) {
                         for (document in task.result) {
                             val st: ArchitectureStyle = document.toObject(ArchitectureStyle::class.java)
+                            st.id = document.id
                             styles.add(st)
                         }
                         val listView = binding.listView as ListView
