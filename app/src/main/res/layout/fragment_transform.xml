@@ -6,4 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutManager="LinearLayoutManager"
-    tools:context=".ui.transform.TransformFragment" />
+    tools:context=".ui.transform.TransformFragment"
+    android:layout_marginVertical="10dp"
+    android:layout_marginHorizontal="15dp"
+    android:divider="@android:color/transparent"
+    android:dividerHeight="20dp"
+    />

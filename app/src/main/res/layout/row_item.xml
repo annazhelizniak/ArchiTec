@@ -3,23 +3,15 @@
     android:id="@+id/row_item"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@drawable/item"
     >
-    <ImageView
-        android:id="@+id/item_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:src="@android:drawable/ic_dialog_info" />
-
 
     <TextView
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
+        android:layout_marginVertical="20dp"
         android:layout_marginTop="0dp"
         android:text="Style name"
         android:fontFamily="@font/teko"

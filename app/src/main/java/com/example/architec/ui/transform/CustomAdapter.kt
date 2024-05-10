@@ -2,12 +2,14 @@ package com.example.architec.ui.transform
 
 import com.example.architec.R
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.architec.DetailActivity
 import com.example.architec.data.ArchitectureStyle
 
 
@@ -28,6 +30,9 @@ class CustomAdapter(data: MutableList<ArchitectureStyle>, context: Context) :
         val position = v.getTag() as Int
         val `object`: Any? = getItem(position)
         val dataModel: ArchitectureStyle? = `object` as ArchitectureStyle?
+        val intent = Intent(mContext, DetailActivity::class.java)
+        intent.putExtra("architecture_style_id", dataModel?.id)
+        mContext.startActivity(intent)
     }
 
     private var lastPosition = -1
@@ -47,7 +52,6 @@ class CustomAdapter(data: MutableList<ArchitectureStyle>, context: Context) :
             viewHolder.txtName = rowView.findViewById(R.id.name)
             viewHolder.txtTimePeriod = rowView.findViewById(R.id.time_period)
             viewHolder.txtOrigin = rowView.findViewById(R.id.origin)
-            viewHolder.info = rowView.findViewById(R.id.item_info)
             rowView.tag = viewHolder
         } else {
             rowView = convertView
