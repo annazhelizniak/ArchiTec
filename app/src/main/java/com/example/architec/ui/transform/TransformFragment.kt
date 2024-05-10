@@ -1,101 +1,71 @@
 package com.example.architec.ui.transform
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
+import android.widget.ListView
+import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.example.architec.R
+import androidx.lifecycle.MutableLiveData
+import com.example.architec.data.ArchitectureStyle
 import com.example.architec.databinding.FragmentTransformBinding
-import com.example.architec.databinding.ItemTransformBinding
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.firestore
 
-/**
- * Fragment that demonstrates a responsive layout pattern where the format of the content
- * transforms depending on the size of the screen. Specifically this Fragment shows items in
- * the [RecyclerView] using LinearLayoutManager in a small screen
- * and shows items using GridLayoutManager in a large screen.
- */
+
 class TransformFragment : Fragment() {
 
     private var _binding: FragmentTransformBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private val db = Firebase.firestore
+    private val _styles = MutableLiveData<List<ArchitectureStyle>>()
+    val stylesList = ArrayList<ArchitectureStyle>()
     private val binding get() = _binding!!
+    private lateinit var viewModel: TransformViewModel
+
+    private lateinit var transformViewModel: TransformViewModel
+    private var adapter: CustomAdapter? = null
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
-        val transformViewModel = ViewModelProvider(this).get(TransformViewModel::class.java)
         _binding = FragmentTransformBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        val recyclerView = binding.recyclerviewTransform
-        val adapter = TransformAdapter()
-        recyclerView.adapter = adapter
-        transformViewModel.texts.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-        }
-        return root
+        db.collection("styles").get()
+            .addOnCompleteListener(object : OnCompleteListener<QuerySnapshot> {
+                override fun onComplete(@NonNull task: Task<QuerySnapshot>) {
+                    val styles: MutableList<ArchitectureStyle> = ArrayList<ArchitectureStyle>()
+                    if (task.isSuccessful) {
+                        for (document in task.result) {
+                            val st: ArchitectureStyle = document.toObject(ArchitectureStyle::class.java)
+                            styles.add(st)
+                        }
+                        val listView = binding.listView as ListView
+                        val custom = CustomAdapter(styles, requireContext())
+                        listView.adapter = custom
+                        showToast("Done")
+                    } else {
+                        Log.d("MissionActivity", "Error getting documents: ", task.exception)
+                    }
+
+                }
+            })
+
+        return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
-    class TransformAdapter : ListAdapter<String, TransformViewHolder>(object : DiffUtil.ItemCallback<String>() {
-
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean =
-                oldItem == newItem
-
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean =
-                oldItem == newItem
-    }) {
-
-        private val drawables = listOf(
-                R.drawable.avatar_1,
-                R.drawable.avatar_2,
-                R.drawable.avatar_3,
-                R.drawable.avatar_4,
-                R.drawable.avatar_5,
-                R.drawable.avatar_6,
-                R.drawable.avatar_7,
-                R.drawable.avatar_8,
-                R.drawable.avatar_9,
-                R.drawable.avatar_10,
-                R.drawable.avatar_11,
-                R.drawable.avatar_12,
-                R.drawable.avatar_13,
-                R.drawable.avatar_14,
-                R.drawable.avatar_15,
-                R.drawable.avatar_16,
-        )
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransformViewHolder {
-            val binding = ItemTransformBinding.inflate(LayoutInflater.from(parent.context))
-            return TransformViewHolder(binding)
-        }
-
-        override fun onBindViewHolder(holder: TransformViewHolder, position: Int) {
-            holder.textView.text = getItem(position)
-            holder.imageView.setImageDrawable(
-                    ResourcesCompat.getDrawable(holder.imageView.resources, drawables[position], null))
-        }
-    }
-
-    class TransformViewHolder(binding: ItemTransformBinding) : RecyclerView.ViewHolder(binding.root) {
-
-        val imageView: ImageView = binding.imageViewItemTransform
-        val textView: TextView = binding.textViewItemTransform
-    }
 }
+
+
