@@ -28,7 +28,8 @@
         android:layout_marginTop="5dp"
         android:fontFamily="@font/teko_light"
         android:text="Time period"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textStyle="italic"/>
     <TextView
         android:id="@+id/origin"
         android:layout_width="wrap_content"

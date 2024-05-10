@@ -2,7 +2,10 @@ package com.example.architec
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.example.architec.data.ArchitectureStyle
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -28,8 +31,8 @@ class DetailActivity : AppCompatActivity() {
         // Initialize TextViews
         nameTextView = findViewById(R.id.name)
         descriptionTextView = findViewById(R.id.description)
-//        originTextView = findViewById(R.id.origin_text_view)
-//        timePeriodTextView = findViewById(R.id.time_period_text_view)
+        originTextView = findViewById(R.id.origin)
+        timePeriodTextView = findViewById(R.id.time_period)
         // Initialize other TextViews for other fields as needed
 
         // Fetch ArchitectureStyle from Firestore
@@ -61,8 +64,28 @@ class DetailActivity : AppCompatActivity() {
         // Display ArchitectureStyle data on TextViews
         nameTextView.text = architectureStyle.name
         descriptionTextView.text = architectureStyle.description
-//        originTextView.text = architectureStyle.origin
-//        timePeriodTextView.text = architectureStyle.time_period
-        // Update other TextViews for other fields as needed
+         originTextView.text = architectureStyle.origin
+         timePeriodTextView.text = architectureStyle.time_period
+
+        // Add features to the LinearLayout
+        val featuresLayout = findViewById<LinearLayout>(R.id.features)
+        featuresLayout.removeAllViews() // Clear existing views
+        val iconSize = resources.getDimensionPixelSize(R.dimen.icon_size)
+        architectureStyle.features?.let { features ->
+            for (feature in features) {
+                // Create a TextView for each feature
+                val featureTextView = TextView(this)
+                featureTextView.layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+                featureTextView.text = feature
+                val icon = ContextCompat.getDrawable(this, R.drawable.column)
+                icon?.setBounds(0, 0, iconSize, iconSize) // Set icon size
+                featureTextView.setCompoundDrawables(icon, null, null, null)
+                featureTextView.compoundDrawablePadding = resources.getDimensionPixelSize(R.dimen.icon_dimen) // Set padding between icon and text
+                featuresLayout.addView(featureTextView)
+            }
+        }
     }
 }

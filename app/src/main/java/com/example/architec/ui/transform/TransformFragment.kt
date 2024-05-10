@@ -53,7 +53,7 @@ class TransformFragment : Fragment() {
                         listView.adapter = custom
                         showToast("Done")
                     } else {
-                        Log.d("MissionActivity", "Error getting documents: ", task.exception)
+                        Log.d("Styles", "Error getting documents: ", task.exception)
                     }
 
                 }
