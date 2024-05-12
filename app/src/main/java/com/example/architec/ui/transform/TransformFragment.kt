@@ -51,7 +51,6 @@ class TransformFragment : Fragment() {
                         val listView = binding.listView as ListView
                         val custom = CustomAdapter(styles, requireContext())
                         listView.adapter = custom
-                        showToast("Done")
                     } else {
                         Log.d("Styles", "Error getting documents: ", task.exception)
                     }
@@ -61,12 +60,6 @@ class TransformFragment : Fragment() {
 
         return binding.root
     }
-
-
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-    }
-
 }
 
 

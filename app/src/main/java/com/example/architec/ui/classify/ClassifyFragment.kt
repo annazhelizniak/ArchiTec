@@ -1,42 +1,52 @@
 package com.example.architec.ui.classify
 
 import ClassificationResultFragment
+import android.app.Activity
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.icu.text.SimpleDateFormat
 import android.media.ExifInterface
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.Nullable
 import androidx.camera.core.CameraSelector
-import androidx.camera.core.CameraX
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
-import androidx.camera.core.impl.PreviewConfig
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-
-
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.example.architec.R
 import com.example.architec.databinding.FragmentReflowBinding
+import com.google.android.material.button.MaterialButton
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.io.File
-import java.text.SimpleDateFormat
+import java.io.IOException
 import java.util.Date
 import java.util.Locale
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+
 
 class ClassifyFragment : Fragment() {
 
@@ -64,12 +74,46 @@ class ClassifyFragment : Fragment() {
 //        classifyViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
 //        }
+        val galleryButton: Button = root.findViewById(R.id.gallery_button)
+        galleryButton.setOnClickListener {
+            openGallery()
+        }
         return root
     }
 
     private val cameraPermissionCode = 101
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var imageCapture: ImageCapture
+    private var selectedImageUri: Uri? = null
+
+
+    private val galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            val selectedImageUri1: Uri? = data?.data
+            selectedImageUri1?.let {
+                selectedImageUri = selectedImageUri1
+                showSelectedImage(it)
+            }
+        }
+    }
+
+    private fun openGallery() {
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        galleryLauncher.launch(galleryIntent)
+    }
+
+    private fun showSelectedImage(imageUri: Uri) {
+        try {
+            val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, imageUri)
+            photoPreviewImageView.setImageBitmap(bitmap)
+            photoPreviewImageView.visibility = View.VISIBLE
+            binding.cameraPreviewView.visibility = View.INVISIBLE
+        } catch (e: IOException) {
+            e.printStackTrace()
+            // Handle the exception as needed
+        }
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -108,6 +152,7 @@ class ClassifyFragment : Fragment() {
                     // Photo saved successfully
                     // You can update UI or provide feedback to the user if needed
                     photoFilePath = photoFile.absolutePath
+                    selectedImageUri = photoFile.toUri()
                     showPhotoPreview(photoFile)
                 }
 
@@ -169,17 +214,34 @@ class ClassifyFragment : Fragment() {
 // In ClassifyFragment.kt
 
     private fun navigateToNextFragment() {
-        val bundle = Bundle().apply {
-            putString("photoFilePath", photoFilePath)
+        // Get the URI of the image displayed in photoPreviewImageView
+        val imageUri = selectedImageUri
+
+        // Check if the URI is not null
+        if (imageUri != null) {
+            val bundle = Bundle().apply {
+                putParcelable("selectedImageUri", imageUri)
+            }
+
+            val classificationResultFragment = ClassificationResultFragment()
+            classificationResultFragment.arguments = bundle
+
+            requireActivity().supportFragmentManager.beginTransaction()
+                .replace(R.id.nav_host_fragment_content_main, classificationResultFragment)
+                .addToBackStack(null)
+                .commit()
+        } else {
+            // Handle the case where no image is selected
+            Toast.makeText(requireContext(), "No image selected", Toast.LENGTH_SHORT).show()
         }
+    }
 
-        val classificationResultFragment = ClassificationResultFragment()
-        classificationResultFragment.arguments = bundle
-
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.nav_host_fragment_content_main, classificationResultFragment)
-            .addToBackStack(null)
-            .commit()
+    private fun saveBitmapToFile(bitmap: Bitmap): File {
+        val tempFile = File.createTempFile("temp_image", ".jpg", requireContext().cacheDir)
+        tempFile.outputStream().use { outputStream ->
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+        }
+        return tempFile
     }
 
 

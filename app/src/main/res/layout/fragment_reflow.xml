@@ -27,7 +27,7 @@
         app:layout_constraintBottom_toTopOf="@id/camera_button"
         app:layout_constraintTop_toTopOf="parent"></androidx.camera.view.PreviewView>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/camera_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,9 +35,16 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:contentDescription="@string/selected_picture"
-        android:text="@string/photo"
+        android:text="Camera"
+        app:icon="@drawable/outline_camera_alt_24"
+        app:cornerRadius="30dp"
+        android:fontFamily="@font/teko"
+        android:letterSpacing="0.06"
         android:textAlignment="center"
         android:textSize="20sp"
+        app:iconTint="@color/red_dark"
+        android:backgroundTint="@color/light_grey"
+        android:textColor="@color/red_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -45,33 +52,46 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/gallery_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="5dp"
+        android:text="Gallery"
+        android:fontFamily="@font/teko"
+        android:letterSpacing="0.06"
+        android:textColor="@color/red_dark"
         android:contentDescription="@string/selected_picture"
-        android:text="@string/gallery"
+        app:icon="@drawable/outline_attach_file_24"
+        app:iconTint="@color/red_dark"
+        android:backgroundTint="@color/light_grey"
         android:textAlignment="center"
         android:textSize="20sp"
+        app:cornerRadius="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/camera_button"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/next_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
         android:layout_marginTop="8dp"
+        android:fontFamily="@font/teko"
+        android:letterSpacing="0.06"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/red_dark"
         android:contentDescription="@string/selected_picture"
-        android:text="@string/next"
         android:textAlignment="center"
         android:textSize="20sp"
+        app:cornerRadius="30dp"
+        app:flow_horizontalAlign="end"
+        app:icon="@drawable/outline_arrow_forward_24"
+        app:iconTint="@color/light_grey"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/camera_button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976" />
 
