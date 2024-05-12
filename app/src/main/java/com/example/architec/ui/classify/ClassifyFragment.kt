@@ -3,6 +3,7 @@ package com.example.architec.ui.classify
 import ClassificationResultFragment
 import android.app.Activity
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -40,6 +41,7 @@ import com.example.architec.databinding.FragmentReflowBinding
 import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
 import java.util.Date
@@ -131,13 +133,39 @@ class ClassifyFragment : Fragment() {
 
         val cameraButton: Button = view.findViewById(R.id.camera_button)
         cameraButton.setOnClickListener {
-            takePhoto()
+            // takePhoto()
+            openCameraView()
         }
 
         val nextButton: Button = view.findViewById(R.id.next_button)
         nextButton.setOnClickListener {
             navigateToNextFragment()
         }
+    }
+
+    private fun openCameraView() {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        cameraLauncher.launch(cameraIntent)
+    }
+
+    private val cameraLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            val imageBitmap = data?.extras?.get("data") as? Bitmap
+            imageBitmap?.let {
+                photoPreviewImageView.setImageBitmap(it)
+                photoPreviewImageView.visibility = View.VISIBLE
+                binding.cameraPreviewView.visibility = View.INVISIBLE
+                selectedImageUri = getImageUriFromBitmap(requireContext(), it)
+            }
+        }
+    }
+
+    private fun getImageUriFromBitmap(context: Context, bitmap: Bitmap): Uri {
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(context.contentResolver, bitmap, "Title", null)
+        return Uri.parse(path)
     }
 
     private fun takePhoto() {

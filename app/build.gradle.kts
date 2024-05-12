@@ -68,6 +68,7 @@ dependencies {
     implementation("com.google.firebase:firebase-ml-vision-barcode-model:16.1.2")
     implementation("com.github.bumptech.glide:glide:4.12.0")
     implementation("com.google.firebase:firebase-ml-vision:24.1.0")
+    implementation("com.google.firebase:firebase-ml-model-interpreter:22.0.4")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")
     implementation("com.google.firebase:firebase-storage:21.0.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.12.0")

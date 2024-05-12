@@ -1,25 +1,23 @@
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.architec.R
-import com.example.architec.ui.classify.ClassifyFragment
-import java.io.File
-import android.graphics.Matrix
-import android.media.ExifInterface
-import android.net.Uri
-import android.widget.TextView
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.util.FileUtil
+import com.google.firebase.ml.common.modeldownload.FirebaseModelDownloadConditions
+import com.google.firebase.ml.common.modeldownload.FirebaseModelManager
+import com.google.firebase.ml.custom.FirebaseCustomRemoteModel
 import org.tensorflow.lite.Interpreter
-import java.nio.ByteBuffer
+import java.io.File
+import java.io.IOException
+import java.nio.MappedByteBuffer
 
-
-import java.nio.ByteOrder
 
 class ClassificationResultFragment : Fragment() {
     override fun onCreateView(
@@ -34,15 +32,50 @@ class ClassificationResultFragment : Fragment() {
 
         val selectedImageUri = arguments?.getParcelable<Uri>("selectedImageUri")
 
-//        selectedImageUri?.let { uri ->
-//            Glide.with(requireContext())
-//                .load(uri)
-//                .into(imageView)
-//        }
+        selectedImageUri?.let { uri ->
+            Glide.with(requireContext())
+                .load(uri)
+                .into(imageView)
+        }
 
         return view
     }
+
+    fun predict(view: View?) {
+        context = this
+        val remoteModel: FirebaseCustomRemoteModel = FirebaseCustomRemoteModel.Builder("MobileNet").build()
+        val conditions = FirebaseModelDownloadConditions.Builder()
+            .requireWifi()
+            .build()
+        FirebaseModelManager.getInstance().download(remoteModel, conditions)
+            .addOnSuccessListener { v: Void? ->
+                Log.i("Info", "Switching to downloaded model")
+                FirebaseModelManager.getInstance().getLatestModelFile(remoteModel)
+                    .addOnCompleteListener { task: Task<File> ->
+                        modelFile = task.result
+                        assert(modelFile != null)
+                        interpreter = Interpreter(modelFile, options)
+                    }
+            }
+        if (modelFile != null) {
+            interpreter = Interpreter(modelFile, options)
+            makePrediction()
+        } else {
+            Log.i("Info", "Trying Local Model")
+            try {
+                val tfliteModel: MappedByteBuffer =
+                    FileUtil.loadMappedFile(context, "mobilenet_v1_1.0_224_quant.tflite")
+                val options = Interpreter.Options()
+                interpreter = Interpreter(tfliteModel, options)
+                makePrediction()
+            } catch (e: IOException) {
+                Log.e("tflite Support", "Error reading model", e)
+            }
+        }
+    }
 }
+
+
 //class ClassificationResultFragment : Fragment() {
 //    private lateinit var tflite: Interpreter
 //    override fun onCreateView(
