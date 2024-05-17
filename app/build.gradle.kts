@@ -76,9 +76,14 @@ dependencies {
     annotationProcessor ("com.github.bumptech.glide:compiler:4.12.0")
     implementation("com.karumi:dexter:6.2.2")
     implementation("io.coil-kt:coil:1.1.1")
+    implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
+    implementation("org.tensorflow:tensorflow-lite:2.13.0")
+    implementation("org.tensorflow:tensorflow-lite-gpu:2.16.1")
+    implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
+    implementation("com.google.firebase:firebase-ml-model-interpreter:22.0.4")
 
 
-    implementation("org.tensorflow:tensorflow-lite:2.8.0")
+    implementation("org.tensorflow:tensorflow-lite:2.13.0")
 
 
     testImplementation("junit:junit:4.13.2")

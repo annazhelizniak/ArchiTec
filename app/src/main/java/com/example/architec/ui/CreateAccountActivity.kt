@@ -68,7 +68,6 @@ class CreateAccountActivity : AppCompatActivity() {
                     REQUEST_STORAGE_PERMISSION
                 )
             }
-            // Launch the gallery intent if permissions are granted
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             intent.type = "image/*"
             startActivityForResult(intent, REQUEST_IMAGE_FROM_GALLERY)
@@ -99,13 +98,11 @@ class CreateAccountActivity : AppCompatActivity() {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED
                 && grantResults[1] == PackageManager.PERMISSION_GRANTED
             ) {
-                // Permission granted, launch the gallery intent
                 val intent =
                     Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
                 intent.type = "image/*"
                 startActivityForResult(intent, REQUEST_IMAGE_FROM_GALLERY)
             } else {
-                // Permission denied, handle the case (e.g., show a message)
                 Toast.makeText(
                     this,
                     "Storage permissions are required to access the gallery.",
@@ -119,10 +116,8 @@ class CreateAccountActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_IMAGE_FROM_GALLERY) {
-            // Image selected from gallery
             profilePictureUri = data?.data
             profilePictureUri?.let {
-                // Load the selected image into the add_photo ImageView using Glide
                 Glide.with(this)
                     .load(profilePictureUri)
                     .into(addPhoto)

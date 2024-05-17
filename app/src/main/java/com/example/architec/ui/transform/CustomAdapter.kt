@@ -18,7 +18,6 @@ class CustomAdapter(data: MutableList<ArchitectureStyle>, context: Context) :
     private val dataSet: ArrayList<ArchitectureStyle>
     var mContext: Context
 
-    // View lookup cache
     private class ViewHolder {
         var txtName: TextView? = null
         var txtTimePeriod: TextView? = null
@@ -63,7 +62,6 @@ class CustomAdapter(data: MutableList<ArchitectureStyle>, context: Context) :
         viewHolder.txtTimePeriod?.text = dataModel?.time_period
         viewHolder.txtOrigin?.text = dataModel?.origin
 
-        // Set click listener on the entire row view
         rowView.setOnClickListener(this)
         rowView.tag = position
 

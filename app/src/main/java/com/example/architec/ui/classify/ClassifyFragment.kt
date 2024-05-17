@@ -1,6 +1,6 @@
 package com.example.architec.ui.classify
 
-import ClassificationResultFragment
+
 import android.app.Activity
 import android.Manifest
 import android.content.Context
@@ -55,8 +55,6 @@ class ClassifyFragment : Fragment() {
     private var _binding: FragmentReflowBinding? = null
     private lateinit var photoPreviewImageView: ImageView
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
     var photoFilePath: String? = null
 
@@ -72,10 +70,6 @@ class ClassifyFragment : Fragment() {
         val root: View = binding.root
         photoPreviewImageView = root.findViewById(R.id.selected_image)
 
-//        val textView: TextView = binding.textReflow
-//        classifyViewModel.text.observe(viewLifecycleOwner) {
-//            textView.text = it
-//        }
         val galleryButton: Button = root.findViewById(R.id.gallery_button)
         galleryButton.setOnClickListener {
             openGallery()
@@ -113,16 +107,13 @@ class ClassifyFragment : Fragment() {
             binding.cameraPreviewView.visibility = View.INVISIBLE
         } catch (e: IOException) {
             e.printStackTrace()
-            // Handle the exception as needed
         }
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize camera executor
         cameraExecutor = Executors.newSingleThreadExecutor()
 
-        // Initialize imageCapture
         imageCapture = ImageCapture.Builder().build()
 
         if (hasCameraPermission()) {
@@ -133,13 +124,12 @@ class ClassifyFragment : Fragment() {
 
         val cameraButton: Button = view.findViewById(R.id.camera_button)
         cameraButton.setOnClickListener {
-            // takePhoto()
             openCameraView()
         }
 
         val nextButton: Button = view.findViewById(R.id.next_button)
         nextButton.setOnClickListener {
-            navigateToNextFragment()
+            navigateToNextActivity()
         }
     }
 
@@ -177,17 +167,13 @@ class ClassifyFragment : Fragment() {
             cameraExecutor,
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    // Photo saved successfully
-                    // You can update UI or provide feedback to the user if needed
                     photoFilePath = photoFile.absolutePath
                     selectedImageUri = photoFile.toUri()
                     showPhotoPreview(photoFile)
                 }
 
                 override fun onError(exception: ImageCaptureException) {
-                    // Photo capture failed
                     exception.printStackTrace()
-                    // Handle the error as needed
                 }
             }
         )
@@ -195,21 +181,18 @@ class ClassifyFragment : Fragment() {
 
     private fun showPhotoPreview(photoFile: File) {
         try {
-            // Decode the image file to get its dimensions and orientation
             val options = BitmapFactory.Options()
             options.inJustDecodeBounds = true
             BitmapFactory.decodeFile(photoFile.absolutePath, options)
             val imageWidth = options.outWidth
             val imageHeight = options.outHeight
 
-            // Get the orientation from the image file
             val exif = ExifInterface(photoFile.absolutePath)
             val orientation = exif.getAttributeInt(
                 ExifInterface.TAG_ORIENTATION,
                 ExifInterface.ORIENTATION_UNDEFINED
             )
 
-            // Rotate the bitmap based on the orientation
             val matrix = Matrix()
             when (orientation) {
                 ExifInterface.ORIENTATION_ROTATE_90 -> matrix.setRotate(90f)
@@ -217,7 +200,6 @@ class ClassifyFragment : Fragment() {
                 ExifInterface.ORIENTATION_ROTATE_270 -> matrix.setRotate(270f)
             }
 
-            // Decode the image file again, applying the rotation matrix
             options.inJustDecodeBounds = false
             val bitmap = BitmapFactory.decodeFile(photoFile.absolutePath, options)
             val rotatedBitmap = Bitmap.createBitmap(
@@ -226,43 +208,30 @@ class ClassifyFragment : Fragment() {
                 matrix, true
             )
 
-            // Update the ImageView with the rotated bitmap
             photoPreviewImageView.setImageBitmap(rotatedBitmap)
             photoPreviewImageView.visibility = View.VISIBLE
 
-            // Hide the camera preview
             binding.cameraPreviewView.visibility = View.INVISIBLE
         } catch (e: Exception) {
-            e.printStackTrace()
-            // Handle the exception as needed
         }
     }
 
 
 // In ClassifyFragment.kt
 
-    private fun navigateToNextFragment() {
-        // Get the URI of the image displayed in photoPreviewImageView
+    private fun navigateToNextActivity() {
         val imageUri = selectedImageUri
 
-        // Check if the URI is not null
         if (imageUri != null) {
-            val bundle = Bundle().apply {
-                putParcelable("selectedImageUri", imageUri)
+            val intent = Intent(requireContext(), ClassificationResultActivity::class.java).apply {
+                putExtra("selectedImageUri", imageUri)
             }
-
-            val classificationResultFragment = ClassificationResultFragment()
-            classificationResultFragment.arguments = bundle
-
-            requireActivity().supportFragmentManager.beginTransaction()
-                .replace(R.id.nav_host_fragment_content_main, classificationResultFragment)
-                .addToBackStack(null)
-                .commit()
+            startActivity(intent)
         } else {
-            // Handle the case where no image is selected
             Toast.makeText(requireContext(), "No image selected", Toast.LENGTH_SHORT).show()
         }
     }
+
 
     private fun saveBitmapToFile(bitmap: Bitmap): File {
         val tempFile = File.createTempFile("temp_image", ".jpg", requireContext().cacheDir)

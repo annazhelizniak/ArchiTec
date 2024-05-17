@@ -1,0 +1,51 @@
+Modernism, International style
+Baroque, Rococo Architecture
+Classical, Achaemenid architecture
+Novelty architecture
+Renaissance_and_Colonialism, Spanish Renaissance Architecture
+Baroque, Ukrainian Baroque
+21_st_Century, Blobitecture
+Early_Christian_Medieval, Romanesque architecture
+Early_Christian_Medieval, Gothic architecture
+Neoclassicism, Stalin Ampir
+21_st_Century, Postmodern architecture
+Baroque, Russian Baroque Architecture
+Renaissance_and_Colonialism, Georgian architecture
+Baroque, Baroque architecture
+Modernism, Art Deco architecture
+Eclecticism, American craftsman style
+Baroque, Sicilian Baroque Architecture
+Neoclassicism, Beaux-Arts architecture
+Revivalism, Queen Anne architecture
+Ukrainian folk architecture
+Renaissance_and_Colonialism, Northern Renaissance Architecture
+21_st_Century, Neo-futurism architecture
+Revivalism, Russian Revival architecture
+Early_Christian_Medieval, Norman
+Renaissance_and_Colonialism, Mannerist Architecture
+Renaissance_and_Colonialism, French Renaissance Architecture
+Modernism, Brutalism
+Eclecticism, Art Nouveau architecture
+Ukrainian classicism architecture
+Classical, Roman Classical architecture
+Classical, Herodian architecture
+Modernism, Ukrainian modern architecture
+Neoclassicism, Palladian architecture
+21_st_Century, Deconstructivism
+Renaissance_and_Colonialism, Colonial architecture
+Early_Christian_Medieval, Byzantine architecture
+Neoclassicism, Greek Revival architecture
+Revivalism, Edwardian architecture
+21_st_Century, Eco-architecture
+Modernism, Bauhaus architecture
+Baroque, Andean Baroque Architecture
+Revivalism, Colonial Revival archtecture
+Renaissance_and_Colonialism, Spanish Colonial Architecture
+Modernism, Chicago school architecture
+Early_Christian_Medieval, Venetian Gothic Architecture
+Revivalism, Orientalism Architecture
+Revivalism, Tudor Revival architecture
+Early_Christian_Medieval, Medieval Architecture
+Baroque, Earthquake Baroque Architecture
+Eclecticism, American Foursquare architecture
+Classical, Ancient Egyptian architecture
