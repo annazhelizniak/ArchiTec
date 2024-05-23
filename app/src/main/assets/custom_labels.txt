@@ -1,0 +1,51 @@
+21_st_Century, Blobitecture
+21_st_Century, Deconstructivism
+21_st_Century, Eco-architecture
+21_st_Century, Neo-futurism architecture
+21_st_Century, Postmodern architecture
+Baroque, Andean Baroque Architecture
+Baroque, Baroque architecture
+Baroque, Earthquake Baroque Architecture
+Baroque, Rococo Architecture
+Baroque, Russian Baroque Architecture
+Baroque, Sicilian Baroque Architecture
+Baroque, Ukrainian Baroque
+Classical, Achaemenid architecture
+Classical, Ancient Egyptian architecture
+Classical, Herodian architecture
+Classical, Roman Classical architecture
+Early_Christian_Medieval, Byzantine architecture
+Early_Christian_Medieval, Gothic architecture
+Early_Christian_Medieval, Medieval Architecture
+Early_Christian_Medieval, Norman
+Early_Christian_Medieval, Romanesque architecture
+Early_Christian_Medieval, Venetian Gothic Architecture
+Eclecticism, American Foursquare architecture
+Eclecticism, American craftsman style
+Eclecticism, Art Nouveau architecture
+Modernism, Art Deco architecture
+Modernism, Bauhaus architecture
+Modernism, Brutalism
+Modernism, Chicago school architecture
+Modernism, International style
+Modernism, Ukrainian modern architecture
+Neoclassicism, Beaux-Arts architecture
+Neoclassicism, Greek Revival architecture
+Neoclassicism, Palladian architecture
+Neoclassicism, Stalin Ampir
+Novelty architecture
+Renaissance_and_Colonialism, Colonial architecture
+Renaissance_and_Colonialism, French Renaissance Architecture
+Renaissance_and_Colonialism, Georgian architecture
+Renaissance_and_Colonialism, Mannerist Architecture
+Renaissance_and_Colonialism, Northern Renaissance Architecture
+Renaissance_and_Colonialism, Spanish Colonial Architecture
+Renaissance_and_Colonialism, Spanish Renaissance Architecture
+Revivalism, Colonial Revival architecture
+Revivalism, Edwardian architecture
+Revivalism, Orientalism Architecture
+Revivalism, Queen Anne architecture
+Revivalism, Russian Revival architecture
+Revivalism, Tudor Revival architecture
+Ukrainian classicism architecture
+Ukrainian folk architecture

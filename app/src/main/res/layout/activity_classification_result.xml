@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.classify.ClassificationResultActivity">
+
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
+        android:background="@drawable/shape"
         android:layout_height="match_parent"
         android:padding="16dp">
 
@@ -16,20 +16,41 @@
             android:id="@+id/user_input"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_weight="1"
             android:scaleType="fitCenter"
             android:src="@android:drawable/ic_menu_gallery"
             android:contentDescription="@string/photo"/>
 
-        <TextView
-            android:id="@+id/classificationResultTextView"
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/output"
             android:layout_below="@id/user_input"
-            android:layout_marginTop="16dp"
-            android:text="Baroque architecture"
+            android:layout_marginTop="30dp">
+
+            <TableLayout
+                android:id="@+id/resultTable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="1">
+                <!-- Table rows will be added programmatically -->
+            </TableLayout>
+        </HorizontalScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="48dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/red_middle"
+            android:fontFamily="@font/teko"
+            android:letterSpacing="0.06"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:layout_below="@id/output"
             android:textSize="18sp"
-            tools:text="Style: Vintage, Probability: 80%"/>
+            app:cornerRadius="30dp" />
 
     </RelativeLayout>
 
