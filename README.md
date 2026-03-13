@@ -12,7 +12,7 @@ The project focuses on building a lightweight and efficient neural network suita
 • 51 architectural styles including Ukrainian architecture  
 • 18,112 images dataset collected and curated manually  
 • Optimized for mobile deployment (model size vs accuracy trade-off)  
-• 🎯 Final accuracy: 65.4%**
+• 🎯 Final accuracy: 65.4%
 
 ---
 
